@@ -1,5 +1,91 @@
 body {
     display: flex;
-    
+    flex-direction: column;
     justify-content: center;
+    align-content: center;
+    opacity: 1;
 }
+
+.start-button{
+    width: 100px;
+    align-content: center;
+    align-self: center;
+    height: 100px;
+}
+
+#player-choice{
+    display: flex;
+    align-self: center;
+    background-color: black;
+    color: white;
+}
+
+.choices{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 7.5%;
+    opacity: 1;
+}
+
+.cbtn {
+    width: 100px;
+    
+}
+
+#rock {
+
+}
+
+.images{
+    display: flex;
+    align-self: center;
+    opacity: 1;
+}
+
+#scissors-pic {
+    height: 100px;
+    width: auto;
+}
+
+.image {
+    height: 100px;
+    width: auto;
+}
+
+.images{
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    margin-top: 25px;
+}
+
+p#computer-text {
+    display: flex;
+    color: white;
+    background-color: black;
+    justify-self: center;
+    align-self: center;
+}
+
+#textbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    align-self: center;
+    width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#cloak {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    background-color: black;
+}
+
+

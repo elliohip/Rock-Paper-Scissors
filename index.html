@@ -5,17 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/RPS.js"></script>
+    <script defer src="/RPS.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     
 
-    <button type="button" id="btn"></button>
-    <form id="playerChoice"> <input type="text" id="input"></form>
+    <button type="button" id="btn" class="start-button">Play Game</button>
+    <div id="textbox">
+        <p id="computer-text">want to play?</p>
+    </div>
 
-    <p id="paragraph">par</p>
+    <div id="cloak">
+    <div class="images">
+        <img class="image" id="rock-pic" src="Rock-OP.png">
+        <img class="image" id="paper-pic" src="paper-OP.png">
+        <img class="image" id="scissors-pic" src="Scissors-OP.png">
+    </div>
+    <div class="choices">
+        <button type="button" class="cbtn" id="rock"><p style="font-size:20px">rock</p></button>
+        <button type="button" class="cbtn" id="paper"><p style="font-size:20px">paper</p></button>
+        <button type="button" class="cbtn" id="scissors"><p style="font-size:20px">scissors</p></button>
+    </div>
+
     
+    </div>
+
 </body>
 </html>
