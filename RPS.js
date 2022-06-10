@@ -10,12 +10,14 @@ const CHOICES = document.querySelectorAll(".choices");
 let CLOAK = document.getElementById("cloak");
 
 
-let gameChoice = computerPlay();
+
 let playerScore = 0;
 let computerScore = 0;
 let playerChoice;
 let choiceCount = 0;
 let pChoice = false;
+
+const gameChoices = ["rock", "paper", "scissors"];
 
 
 let gameStart;
@@ -27,39 +29,36 @@ function getRandomInt(max) {
 
 function computerPlay() {
 
-    let choice = getRandomInt(3);
+    
 
-    if (choice == 0) {
-        return "rock";
-    }
-    else if (choice == 1) {
-        return "paper";
-    }
-    else if (choice == 2) {
-        return "scissors";
-    }
+    return gameChoices[getRandomInt(2)];
 
 };
+let gameChoice = computerPlay();
 
 function setPlayerChoice(evt) {
    
 
-    if (evt.target == rock) {
+    if (evt.target.innerHTML == 'rock') {
         playerChoice = "rock";
         console.log("rock");
         playGame(computerPlay());
         pChoice = true;
-    } else if (evt.target == paper) {
+        console.log("roc");
+
+    } else if (evt.target.innerHTML == 'paper') {
         playerChoice = "paper";
         console.log("paper");
         playGame(computerPlay());
         pChoice = true;
+        console.log("pap");
 
-    } else if (evt.target == scissors) {
+    } else if (evt.target.innerHTML == 'scissors') {
         playerChoice = "scissors";
         console.log("scissors");
         playGame(computerPlay());
         pChoice = true;
+        console.log("scis");
     }
 
 };
@@ -71,13 +70,11 @@ function changeOpac() {
 
     let opaclevel = 0;
 
-    // CLOAK.style.opacity = "1";
-    for (i = 0; i < 10; i++) {
-        opaclevel = opaclevel + 0.1;
-        CLOAK.style.opacity = opaclevel.toString();
-    }
+    CLOAK.style.opacity = "1";
+    
 
     text.innerHTML = "game start, pick your weapon";
+    
     
 
 }
@@ -100,11 +97,10 @@ function playGame(computerChoice) {
 
     let tie = (playerChoice == computerChoice);
 
-    
+    if (playerScore + computerScore < 5) {
     switch (true) {
 
         case (tie): text.innerHTML = "tie!";
-        
         break;
         
         case(playerChoice == "rock" && computerChoice == "scissors"): playerScore++;
@@ -139,6 +135,8 @@ function playGame(computerChoice) {
 
         
     }
+    }
+
     if (playerScore + computerScore >= 5) {
 
         if (playerScore > computerScore) {
