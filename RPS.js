@@ -2,7 +2,7 @@ const startBtn = document.getElementById('btn');
 const rock = document.getElementById('rock');
 const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
-
+const text = document.getElementById("computer-text");
 
 
 const PICTURES = document.querySelectorAll(".images");
@@ -14,7 +14,8 @@ let gameChoice = computerPlay();
 let playerScore = 0;
 let computerScore = 0;
 let playerChoice;
-let choiceCount = 0
+let choiceCount = 0;
+let pChoice = false;
 
 
 let gameStart;
@@ -25,6 +26,7 @@ function getRandomInt(max) {
 };
 
 function computerPlay() {
+
     let choice = getRandomInt(3);
 
     if (choice == 0) {
@@ -39,121 +41,123 @@ function computerPlay() {
 
 };
 
+function setPlayerChoice(evt) {
+   
+
+    if (evt.target == rock) {
+        playerChoice = "rock";
+        console.log("rock");
+        playGame(computerPlay());
+        pChoice = true;
+    } else if (evt.target == paper) {
+        playerChoice = "paper";
+        console.log("paper");
+        playGame(computerPlay());
+        pChoice = true;
+
+    } else if (evt.target == scissors) {
+        playerChoice = "scissors";
+        console.log("scissors");
+        playGame(computerPlay());
+        pChoice = true;
+    }
+
+};
+
 
 startBtn.addEventListener("click", changeOpac);
 
 function changeOpac() {
-    CLOAK.style.opacity = "1";
-    gameMaster();
 
-}
+    let opaclevel = 0;
 
-
-rock.addEventListener('click', getRock );
-
-function getRock() {
-    playerChoice = "rock";
-    console.log("rockget");
-    choiceCount++;
-    if (choiceCount < 5) {
-        gameStart = true;
-
+    // CLOAK.style.opacity = "1";
+    for (i = 0; i < 10; i++) {
+        opaclevel = opaclevel + 0.1;
+        CLOAK.style.opacity = opaclevel.toString();
     }
-    // set HTML of textbox
-}
 
-paper.addEventListener("click", getPaper);
-
-function getPaper() {
-    playerChoice = "paper";
-    console.log("paperget");
-    choiceCount++;
-    if (choiceCount < 5) {
-        gameStart = true;
-
-    }
-    // set HTML of textbox
-}
-
-scissors.addEventListener("click", getScissors);
-
-function getScissors() {
-    playerChoice = "scissors";
-    console.log("scisget");
-
-    choiceCount++;
-    if (choiceCount < 5) {
-        gameStart = true;
-
-    }
-    // set HTML of textbox
-}
-
-// */
-
-
-
-function playGame() {
-
+    text.innerHTML = "game start, pick your weapon";
     
 
-    let pScore;
-    let cScore;
+}
 
-    if (choiceCount > 0) {
 
-    let tie = (playerChoice.toLowerCase() == gameChoice.toLowerCase());
+rock.addEventListener("click", setPlayerChoice);
 
-    switch(true) {
 
-        case (tie): console.log("tie");
+paper.addEventListener("click", setPlayerChoice);
+
+
+
+scissors.addEventListener("click", setPlayerChoice);
+
+
+
+
+
+function playGame(computerChoice) {
+
+    let tie = (playerChoice == computerChoice);
+
+    
+    switch (true) {
+
+        case (tie): text.innerHTML = "tie!";
+        
+        break;
+        
+        case(playerChoice == "rock" && computerChoice == "scissors"): playerScore++;
+        text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
+        playerChoice = "";
+        pChoice = false;
         break;
 
-        case (playerChoice.toLowerCase() == "scissors" && gameChoice.toLowerCase() == 'paper'): console.log('win');
-        console.log(playerChoice + " beats " + gameChoice);
-        pScore = true;
-        playerScore++;
+        case (playerChoice == "paper" && computerChoice == "rock"): playerScore++;
+        text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
+        playerChoice = "";
+        pChoice = false;
         break;
 
-        case (playerChoice.toLowerCase() == "paper" && gameChoice.toLowerCase() == "rock"): console.log("win");
-        console.log(playerChoice + " beats " + gameChoice);
-        pScore = true;
-        playerScore++;
+        case (playerChoice == "scissors" && computerChoice == "paper"): playerScore++;
+        text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
+        playerChoice = "";
+        pChoice = false;
         break;
 
-        case (playerChoice.toLowerCase() == "rock" && gameChoice.toLowerCase() == "scissors"): console.log("win");
-        console.log(playerChoice + " beats " + gameChoice);
-        playerScore++;
-        pScore = true;
+        case (playerChoice == "rock" && computerChoice == "paper"): computerScore++; 
+        text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case (playerChoice.toLowerCase() == "scissors" && gameChoice.toLowerCase() == "rock") : console.log("loss")
-        console.log(gameChoice + " beats " + playerChoice);
-        computerScore++;
-        pScore = false;
+        case (playerChoice == "paper" && computerChoice == "scissors"): computerScore++;
+        text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case (playerChoice.toLowerCase() == "paper" && gameChoice.toLowerCase() == "scissors"): console.log("loss");
-        console.log(gameChoice + " beats " + playerChoice);
-        computerScore++;
-        pScore = false;
+        case(playerChoice == "scissors" && computerChoice == "rock"): computerScore++;
+        text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case (playerChoice.toLowerCase() == "rock" && gameChoice.toLowerCase() == "paper"): console.log("loss");
-        console.log(gameChoice + " beats " + playerChoice);
-        computerScore++;
-        pScore = false;
-        break;
+        
     }
-    return pScore;
+    if (playerScore + computerScore >= 5) {
+
+        if (playerScore > computerScore) {
+            text.innerHTML = "You Win! your score: " + playerScore + " my Score: " + computerScore;
+        } else {
+            text.innerHTML = "You Lose! your score: " + playerScore + " my Score: " + computerScore;
+        }
+
     }
+
 }
 
 function gameMaster() {
 
     for (i = 0; i < 5; i++) {
-        playGame();
+        playGame(computerPlay());
+        
     }
     console.log("score is: " + playerScore/computerScore);
 }
+
 
