@@ -23,6 +23,7 @@ const gameChoices = ["rock", "paper", "scissors"];
 let gameStart;
 
 
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
 };
@@ -31,38 +32,45 @@ function computerPlay() {
 
     
 
-    return gameChoices[getRandomInt(2)];
+    return gameChoices[getRandomInt(3)];
 
 };
 let gameChoice = computerPlay();
 
-function setPlayerChoice(evt) {
+function setRock(evt) {
    
 
-    if (evt.target.innerHTML == 'rock') {
+    
         playerChoice = "rock";
         console.log("rock");
-        playGame(computerPlay());
+        playGame("rock");
         pChoice = true;
-        console.log("roc");
-
-    } else if (evt.target.innerHTML == 'paper') {
-        playerChoice = "paper";
-        console.log("paper");
-        playGame(computerPlay());
-        pChoice = true;
-        console.log("pap");
-
-    } else if (evt.target.innerHTML == 'scissors') {
-        playerChoice = "scissors";
-        console.log("scissors");
-        playGame(computerPlay());
-        pChoice = true;
-        console.log("scis");
-    }
-
+        
+    
+    
 };
 
+function setPaper(evt) {
+    
+        playerChoice = "paper";
+        console.log("paper");
+        playGame("paper");
+        pChoice = true;
+        console.log("pap");
+        
+
+}
+
+function setScissors(evt) {
+    
+        playerChoice = "scissors";
+        console.log("scissors");
+        playGame("scissors");
+        pChoice = true;
+        console.log("scis");
+        
+    
+}
 
 startBtn.addEventListener("click", changeOpac);
 
@@ -80,56 +88,58 @@ function changeOpac() {
 }
 
 
-rock.addEventListener("click", setPlayerChoice);
+rock.addEventListener("click", setRock);
 
 
-paper.addEventListener("click", setPlayerChoice);
-
-
-
-scissors.addEventListener("click", setPlayerChoice);
+paper.addEventListener("click", setPaper);
 
 
 
+scissors.addEventListener("click", setScissors);
 
 
-function playGame(computerChoice) {
 
-    let tie = (playerChoice == computerChoice);
+
+
+function playGame(c) {
+
+    let tie = (c === computerPlay());
 
     if (playerScore + computerScore < 5) {
     switch (true) {
 
         case (tie): text.innerHTML = "tie!";
+        console.log(c);
+        console.log();
         break;
         
-        case(playerChoice == "rock" && computerChoice == "scissors"): playerScore++;
+        case(c === "rock" && computerPlay() == "scissors"): playerScore++;
         text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
         playerChoice = "";
         pChoice = false;
         break;
 
-        case (playerChoice == "paper" && computerChoice == "rock"): playerScore++;
+        case (c === "paper" && computerPlay() == "rock"): playerScore++;
+        text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
+        
+        pChoice = false;
+        break;
+
+        case (c === "scissors" && computerPlay() == "paper"): playerScore++;
         text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
         playerChoice = "";
         pChoice = false;
         break;
 
-        case (playerChoice == "scissors" && computerChoice == "paper"): playerScore++;
-        text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
-        playerChoice = "";
-        pChoice = false;
-        break;
-
-        case (playerChoice == "rock" && computerChoice == "paper"): computerScore++; 
+        case (c === "rock" && computerPlay() == "paper"): computerScore++; 
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case (playerChoice == "paper" && computerChoice == "scissors"): computerScore++;
+        case (c == "paper" && computerPlay() == "scissors"): computerScore++;
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case(playerChoice == "scissors" && computerChoice == "rock"): computerScore++;
+        case(c === "scissors" && computerPlay() == "rock"): computerScore++;
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
@@ -149,13 +159,6 @@ function playGame(computerChoice) {
 
 }
 
-function gameMaster() {
 
-    for (i = 0; i < 5; i++) {
-        playGame(computerPlay());
-        
-    }
-    console.log("score is: " + playerScore/computerScore);
-}
 
 
