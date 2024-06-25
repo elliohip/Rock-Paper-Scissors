@@ -35,7 +35,7 @@ function computerPlay() {
     return gameChoices[getRandomInt(3)];
 
 };
-let gameChoice = computerPlay();
+// let gameChoice = computerPlay();
 
 function setRock(evt) {
    
@@ -102,9 +102,9 @@ scissors.addEventListener("click", setScissors);
 
 
 function playGame(c) {
-
-    let tie = (c === computerPlay());
-
+    let computer_choice = computerPlay();
+    let tie = (c === computer_choice);
+    console.log(computer_choice);
     if (playerScore + computerScore < 5) {
     switch (true) {
 
@@ -113,33 +113,33 @@ function playGame(c) {
         console.log();
         break;
         
-        case(c === "rock" && computerPlay() == "scissors"): playerScore++;
+        case(c === "rock" && computer_choice == "scissors"): playerScore++;
         text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
         playerChoice = "";
         pChoice = false;
         break;
 
-        case (c === "paper" && computerPlay() == "rock"): playerScore++;
+        case (c === "paper" && computer_choice == "rock"): playerScore++;
         text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
         
         pChoice = false;
         break;
 
-        case (c === "scissors" && computerPlay() == "paper"): playerScore++;
+        case (c === "scissors" && computer_choice == "paper"): playerScore++;
         text.innerHTML = "win, your Score is: " + playerScore + "and mine is: " + computerScore;
         playerChoice = "";
         pChoice = false;
         break;
 
-        case (c === "rock" && computerPlay() == "paper"): computerScore++; 
+        case (c === "rock" && computer_choice == "paper"): computerScore++; 
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case (c == "paper" && computerPlay() == "scissors"): computerScore++;
+        case (c == "paper" && computer_choice == "scissors"): computerScore++;
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
-        case(c === "scissors" && computerPlay() == "rock"): computerScore++;
+        case(c === "scissors" && computer_choice == "rock"): computerScore++;
         text.innerHTML = "loss, your Score is: " + playerScore + "and mine is: " + computerScore;
         break;
 
